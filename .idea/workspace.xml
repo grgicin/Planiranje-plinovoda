@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="Preperation for login">
-      <change afterPath="$PROJECT_DIR$/src/LoggedKorisnik.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Vodovod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VodovodDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VodovodDaoImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VodovodSelection.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VodovodSelection.java" afterDir="false" />
+    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="Login DatabaseConnection Pocetak VodovodSeletion-a">
+      <change afterPath="$PROJECT_DIR$/src/VodovodView.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/VodovodView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Planiranje plinovoda.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Planiranje plinovoda.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/databaseConnectionInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/databaseConnectionInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KorisnikDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KorisnikDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodSelection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708273336042</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Login DatabaseConnection Pocetak VodovodSeletion-a">
+      <created>1708280078647</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1708280078647</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -144,6 +145,7 @@
     <MESSAGE value="osnovna implementacija karte" />
     <MESSAGE value="Libraries updated" />
     <MESSAGE value="Preperation for login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Preperation for login" />
+    <MESSAGE value="Login DatabaseConnection Pocetak VodovodSeletion-a" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login DatabaseConnection Pocetak VodovodSeletion-a" />
   </component>
 </project>

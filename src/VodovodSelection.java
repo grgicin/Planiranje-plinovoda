@@ -1,9 +1,9 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class VodovodSelection {
 
     VodovodSelection() {
 
-        JFrame frame = new JFrame("Login");
+        JFrame frame = new JFrame("Selection");
         frame.setContentPane(panelMain);
         frame.setPreferredSize(new Dimension(300, 300));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,12 +26,40 @@ public class VodovodSelection {
         osvjeziTablicu();
         frame.pack();
 
+        natragButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login login = new Login();
+                frame.dispose();
+            }
+        });
+
+
+        tablePlinovoda.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int odabrani = tablePlinovoda.getSelectedRow();
+                if (odabrani >= 0){
+
+                    TableModel model = tablePlinovoda.getModel();
+                    System.out.println(model.getValueAt(odabrani, 0));
+
+                    try {
+                        VodovodView vodovodView = new VodovodView((Integer) model.getValueAt(odabrani, 0));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
+            }
+        });
+
     }
 
     class ButtonRenderer extends JButton implements TableCellRenderer{
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (column == 1){
+            if (column == 2){
                 setText("Odaberi");
             }
             return this;
@@ -45,7 +73,7 @@ public class VodovodSelection {
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            if (column == 1){
+            if (column == 2){
                 odaberiButton.setText("Odaberi");
                 return odaberiButton;
             }
@@ -59,10 +87,11 @@ public class VodovodSelection {
         try {
             List<Vodovod> vodovodList = vodovodDaoImplementation.getVodovodi();
             DefaultTableModel defaultTableModel = new DefaultTableModel();
+            defaultTableModel.addColumn("");
             defaultTableModel.addColumn("Naziv");
-            defaultTableModel.addColumn("Odaberi");
+            defaultTableModel.addColumn("");
             for (Vodovod vodovod : vodovodList){
-                defaultTableModel.addRow(new Object[]{vodovod.getNaziv()});
+                defaultTableModel.addRow(new Object[]{vodovod.getId(), vodovod.getNaziv()});
             }
             odaberiButton = new JButton();
             tablePlinovoda.setModel(defaultTableModel);
@@ -71,14 +100,32 @@ public class VodovodSelection {
             tablePlinovoda.setColumnSelectionAllowed(false);
             tablePlinovoda.setDragEnabled(false);
             tablePlinovoda.setShowGrid(false);
-            tablePlinovoda.getColumn("Odaberi").setCellRenderer(new ButtonRenderer());
-            tablePlinovoda.getColumn("Odaberi").setCellEditor(new ButtonEditor(new JCheckBox()));
+            tablePlinovoda.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePlinovoda.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablePlinovoda.getColumnModel().getColumn(0).setWidth(0);
+            tablePlinovoda.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
+            tablePlinovoda.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox()));
+
             odaberiButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    int odabrani = tablePlinovoda.getSelectedRow();
+                    if (odabrani >= 0){
 
+                        TableModel model = tablePlinovoda.getModel();
+                        System.out.println(model.getValueAt(odabrani, 0));
+
+                        try {
+                            VodovodView vodovodView = new VodovodView((Integer) model.getValueAt(odabrani, 0));
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                    }
                 }
             });
+
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

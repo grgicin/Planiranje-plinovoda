@@ -22,4 +22,18 @@ public class VodovodDaoImplementation implements VodovodDao{
         }
         return vodovodList;
     }
+
+    @Override
+    public Vodovod getVodovod(int id) throws SQLException {
+        String query = "select * from Vodovod where idVodovod = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        Vodovod vodovod = new Vodovod();
+        vodovod.setId(resultSet.getInt(1));
+        vodovod.setNaziv(resultSet.getString(2));
+        return vodovod;
+    }
+
 }
