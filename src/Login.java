@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 public class Login {
     private JPanel panelMain;
@@ -30,7 +32,31 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ()
+                KorisnikDaoImplementation korisnikDaoImplementation = new KorisnikDaoImplementation();
+                Encryption encryption = new Encryption();
+                try {
+                    Korisnik korisnik = new Korisnik();
+                    korisnik.setEmail(String.valueOf(emailTextField.getText()));
+                    String sha = encryption.Encrypt(passwordField.getText());
+                    korisnik.setLozinka(sha);
+                    int idKorisnik = korisnikDaoImplementation.login(korisnik);
+                    if (idKorisnik != 0){
+                        Korisnik korinsnikLoggedIn =  korisnikDaoImplementation.getKorisnik(idKorisnik);
+                        LoggedKorisnik.id = korinsnikLoggedIn.getId();
+                        LoggedKorisnik.ime = korinsnikLoggedIn.getIme();
+                        LoggedKorisnik.prezime = korinsnikLoggedIn.getPrezime();
+                        LoggedKorisnik.brojTelefona = korinsnikLoggedIn.getBrojTelefona();
+                        LoggedKorisnik.email = korinsnikLoggedIn.getEmail();
+                        LoggedKorisnik.idUloga = korinsnikLoggedIn.getIdUloga();
+                        frame.dispose();
+                        VodovodSelection vodovodSelection = new VodovodSelection();
+                    }
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (NoSuchAlgorithmException ex) {
+                    throw new RuntimeException(ex);
+                }
+
             }
         });
 
