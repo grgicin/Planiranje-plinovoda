@@ -1,5 +1,5 @@
 ### IntelliJ IDEA ###
-/databaseConnectionInfo.json
+*.json
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
