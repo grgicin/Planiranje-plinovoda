@@ -46,12 +46,12 @@ public class Main {
 
         mapPanel.setPreferredSize(new Dimension(200 ,200));
         mapPanel.add(jxMapViewer, BorderLayout.CENTER);
-        frame.pack();
         frame.setVisible(true);
+        frame.pack();
 
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        Login login = new Login();
     }
 }

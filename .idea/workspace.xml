@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/databaseConnectionInfo.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DatabaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Encryption.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Korisnik.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/KorisnikDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Login.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Planiranje plinovoda.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Planiranje plinovoda.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -37,12 +51,20 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Matija/Documents/Skola/Robotic/bs/Planiranje plinovoda/libraries/jxmapviewer2-2.6.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "176",
+    "last_opened_file_path": "C:/Users/Matija/Documents/Skola/Robotic/bs/Planiranje plinovoda/libraries/mysql-connector-java-8.0.30.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.32413793",
+    "settings.editor.selected.configurable": "discord-application"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Matija\Documents\Skola\Robotic\bs\Planiranje plinovoda\src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,12 +88,28 @@
       <option name="project" value="LOCAL" />
       <updated>1708260953585</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="osnovna implementacija karte">
+      <created>1708261978717</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708261978717</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Libraries updated">
+      <created>1708262005695</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708262005695</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new file lmao" />
     <MESSAGE value="bs" />
-    <option name="LAST_COMMIT_MESSAGE" value="bs" />
+    <MESSAGE value="osnovna implementacija karte" />
+    <MESSAGE value="Libraries updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Libraries updated" />
   </component>
 </project>
