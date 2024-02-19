@@ -22,6 +22,14 @@ public class Login {
         frame.setLocationRelativeTo(null);
         frame.pack();
 
+
+        VodovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new VodovodnaTockaDaoImplementation();
+        try {
+            System.out.println(vodovodnaTockaDaoImplementation.getTockeinVodovod(1));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,7 +47,7 @@ public class Login {
                     korisnik.setEmail(String.valueOf(emailTextField.getText()));
                     String sha = encryption.Encrypt(passwordField.getText());
                     korisnik.setLozinka(sha);
-                    int idKorisnik = korisnikDaoImplementation.login(korisnik);
+                    int idKorisnik = korisnikDaoImplementation.korisnikLogin(korisnik);
                     if (idKorisnik != 0){
                         Korisnik korinsnikLoggedIn =  korisnikDaoImplementation.getKorisnik(idKorisnik);
                         LoggedKorisnik.id = korinsnikLoggedIn.getId();
@@ -60,6 +68,14 @@ public class Login {
             }
         });
 
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Register register = new Register();
+                frame.dispose();
+            }
+        });
 
 
     }

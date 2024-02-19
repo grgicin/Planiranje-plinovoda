@@ -7,6 +7,14 @@ public class Korisnik {
     private String lozinka;
     private int idUloga;
 
+    public Korisnik(String ime, String prezime, String brojTelefona, String email, String lozinka) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.brojTelefona = brojTelefona;
+        this.email = email;
+        this.lozinka = lozinka;
+    }
+
     public int getId() {
         return id;
     }

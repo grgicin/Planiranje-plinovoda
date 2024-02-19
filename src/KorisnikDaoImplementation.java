@@ -7,7 +7,7 @@ public class KorisnikDaoImplementation implements KorisnikDao{
     Connection connection = DatabaseConnection.getConnection();
 
     @Override
-    public int login(Korisnik korisnik) throws SQLException {
+    public int korisnikLogin(Korisnik korisnik) throws SQLException {
         String query = "select idKorisnik from Korisnik where (email like ?) and (lozinka like ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         preparedStatement.setString(1, korisnik.getEmail());
@@ -19,6 +19,19 @@ public class KorisnikDaoImplementation implements KorisnikDao{
             return resultSet.getInt(1);
         }
         return 0;
+    }
+
+    @Override
+    public void korisnikRegister(Korisnik korisnik) throws SQLException {
+        String query =  "insert into korisnik(ime,Prezime, brojTelefona, email, lozinka) values(?,?,?,?,?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1,korisnik.getIme());
+        preparedStatement.setString(2,korisnik.getPrezime());
+        preparedStatement.setString(3,korisnik.getBrojTelefona());
+        preparedStatement.setString(4,korisnik.getEmail());
+        preparedStatement.setString(5,korisnik.getLozinka());
+        preparedStatement.executeUpdate();
+
     }
 
     @Override
