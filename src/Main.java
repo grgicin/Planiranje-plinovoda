@@ -1,14 +1,17 @@
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.VirtualEarthTileFactoryInfo;
 import org.jxmapviewer.input.PanMouseInputListener;
 import org.jxmapviewer.input.ZoomMouseWheelListenerCenter;
-import org.jxmapviewer.viewer.DefaultTileFactory;
-import org.jxmapviewer.viewer.GeoPosition;
-import org.jxmapviewer.viewer.TileFactoryInfo;
+import org.jxmapviewer.painter.CompoundPainter;
+import org.jxmapviewer.viewer.*;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.List;
 
 public class Main {
     private JPanel panelMain;
@@ -28,14 +31,10 @@ public class Main {
 
 
         //stavljanje tilefactorya tj tip karte (satelit, topograf, itd.)
-        TileFactoryInfo info = new OSMTileFactoryInfo();
+        TileFactoryInfo info = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.HYBRID);
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
         jxMapViewer.setTileFactory(tileFactory);
 
-        //postavljanje karte da se bude na nekoj točki kada se otvori jerr inače bi se otvorila na jako lošem mjestu gdje bi smo možda posmislili da ne radi
-        GeoPosition geo = new GeoPosition(46.02690857698898, 15.959748148031391);
-        jxMapViewer.setAddressLocation(geo);
-        jxMapViewer.setZoom(5);
 
         //stavljanje nekakvih osnovnih kontrola za sami pomak po karti
         MouseInputListener mouseInputListener = new PanMouseInputListener(jxMapViewer);
@@ -46,12 +45,45 @@ public class Main {
 
         mapPanel.setPreferredSize(new Dimension(200 ,200));
         mapPanel.add(jxMapViewer, BorderLayout.CENTER);
+
+        GeoPosition pitomaca = new GeoPosition(45.94898157351707, 17.232299608291896);
+        GeoPosition dj = new GeoPosition(46.03947751666308, 17.068050954410364);
+        List<GeoPosition> ls = new ArrayList<>();
+        ls.add(pitomaca);
+        ls.add(dj);
+        RoutePainter routePainter = new RoutePainter(ls);
+
+        Set<DefaultWaypoint> waypoints = new HashSet<DefaultWaypoint>(Arrays.asList(
+                new DefaultWaypoint(pitomaca),
+                new DefaultWaypoint(dj)));
+
+
+
+
+
+        WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
+        waypointPainter.setWaypoints(waypoints);
+
+        CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>();
+        painter.addPainter(waypointPainter);
+        painter.addPainter(routePainter);
+        jxMapViewer.setOverlayPainter(painter);
+
+
+
+
         frame.setVisible(true);
         frame.pack();
+        jxMapViewer.zoomToBestFit(new HashSet<GeoPosition>(ls), 0.9);
+
 
     }
 
     public static void main(String[] args) {
-        Login login = new Login();
+        try {
+            VodovodView vodovodView = new VodovodView(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

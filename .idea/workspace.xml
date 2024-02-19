@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="Login DatabaseConnection Pocetak VodovodSeletion-a">
-      <change afterPath="$PROJECT_DIR$/src/KorisnikUloga.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Register.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Register.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TipVodovodneTockeDaoImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VodovodnaTocka.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VodovodnaTockaDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VodovodnaTockaDaoImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RoutePainter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SwingWaypoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SwingWaypointOverlayPainter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/databaseConnectionInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/databaseConnectionInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Korisnik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KorisnikDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KorisnikDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,25 +37,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;176&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Matija/Documents/Skola/Robotic/bs/Planiranje plinovoda/libraries/json-simple-1.1.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.32413793&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;discord-application&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "176",
+    "last_opened_file_path": "C:/Users/Matija/Documents/Skola/Robotic/2zimski/SlikaUBlob",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.32413793",
+    "settings.editor.selected.configurable": "discord-application"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Matija\Documents\Skola\Robotic\bs\Planiranje plinovoda\src" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Planiranje plinovoda" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -149,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708282578565</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Basic Dao implementacije iz baze">
+      <created>1708351842090</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1708351842090</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -159,6 +174,7 @@
     <MESSAGE value="Libraries updated" />
     <MESSAGE value="Preperation for login" />
     <MESSAGE value="Login DatabaseConnection Pocetak VodovodSeletion-a" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login DatabaseConnection Pocetak VodovodSeletion-a" />
+    <MESSAGE value="Basic Dao implementacije iz baze" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Dao implementacije iz baze" />
   </component>
 </project>
