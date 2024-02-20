@@ -16,14 +16,11 @@ import org.jxmapviewer.painter.Painter;
 public class RoutePainter implements Painter<JXMapViewer> {
 
     private Color lineColor = new Color(255,255,255);
-    private boolean antiAlias = true;
     private List<GeoPosition> track;
 
     public RoutePainter(List<GeoPosition> track)
     {
-        // copy the list so that changes in the
-        // original list do not have an effect here
-        this.track = new ArrayList<GeoPosition>(track);
+        this.track = track;
     }
 
     @Override
@@ -35,12 +32,11 @@ public class RoutePainter implements Painter<JXMapViewer> {
         Rectangle rect = map.getViewportBounds();
         g.translate(-rect.x, -rect.y);
 
-        if (antiAlias)
-            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // do the drawing
         g.setColor(Color.BLACK);
-        g.setStroke(new BasicStroke(4));
+        g.setStroke(new BasicStroke(3));
 
         drawRoute(g, map);
 

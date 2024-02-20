@@ -25,7 +25,7 @@ public class VodovodnaTockaDaoImplementation implements VodovodnaTockaDao{
             vodovodnaTocka.setKomentar(resultSet.getString(7));
             vodovodnaTocka.setIdTipVodovodneTocke(resultSet.getInt(9));
             vodovodnaTockaList.add(vodovodnaTocka);
-            System.out.println(vodovodnaTocka);
+            //System.out.println(vodovodnaTocka);
         }
         return vodovodnaTockaList;
     }
@@ -41,9 +41,18 @@ public class VodovodnaTockaDaoImplementation implements VodovodnaTockaDao{
         preparedStatement.setInt(5, vodovodnaTocka.getIdVodovod());
         preparedStatement.setInt(6, vodovodnaTocka.getIdTipVodovodneTocke());
         preparedStatement.executeUpdate();
-
-
-
-
     }
+
+    @Override
+    public void updateVodvodnaTockaPosition(VodovodnaTocka vodovodnaTocka) throws SQLException {
+        String query = "UPDATE VodovodnaTocka SET latitude = ?, longitude = ? WHERE (poredVodovod = ?) and (idVodovod = ?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setDouble(1, vodovodnaTocka.getLatutude());
+        preparedStatement.setDouble(2, vodovodnaTocka.getLongitude());
+        preparedStatement.setInt(3, vodovodnaTocka.getPoredVodovod());
+        preparedStatement.setInt(4, vodovodnaTocka.getIdVodovod());
+        preparedStatement.executeUpdate();
+    }
+
+
 }

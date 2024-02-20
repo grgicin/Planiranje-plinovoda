@@ -1,4 +1,15 @@
 public class VodovodnaTocka {
+
+
+    public VodovodnaTocka(double latutude, double longitude, int poredVodovod, String komentar, int idVodovod, int idTipVodovodneTocke) {
+        this.latutude = latutude;
+        this.longitude = longitude;
+        this.poredVodovod = poredVodovod;
+        this.komentar = komentar;
+        this.idVodovod = idVodovod;
+        this.idTipVodovodneTocke = idTipVodovodneTocke;
+    }
+
     public int getIdVodovodneTocke() {
         return idVodovodneTocke;
     }

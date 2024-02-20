@@ -1,10 +1,16 @@
 
 import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.WaypointPainter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseMotionListener;
 
 /**
  * "Paints" the Swing waypoints. In fact, just takes care of correct positioning of the representing button.
@@ -12,6 +18,7 @@ import java.awt.geom.Point2D;
  * @author Daniel Stahr
  */
 public class SwingWaypointOverlayPainter extends WaypointPainter<SwingWaypoint> {
+
 
     @Override
     protected void doPaint(Graphics2D g, JXMapViewer jxMapViewer, int width, int height) {
@@ -25,4 +32,5 @@ public class SwingWaypointOverlayPainter extends WaypointPainter<SwingWaypoint> 
             button.setLocation(buttonX - button.getWidth() / 2, buttonY - button.getHeight() / 2);
         }
     }
+
 }

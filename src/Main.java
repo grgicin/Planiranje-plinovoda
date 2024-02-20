@@ -6,9 +6,15 @@ import org.jxmapviewer.input.ZoomMouseWheelListenerCenter;
 import org.jxmapviewer.painter.CompoundPainter;
 import org.jxmapviewer.viewer.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
@@ -53,19 +59,40 @@ public class Main {
         ls.add(dj);
         RoutePainter routePainter = new RoutePainter(ls);
 
-        Set<DefaultWaypoint> waypoints = new HashSet<DefaultWaypoint>(Arrays.asList(
-                new DefaultWaypoint(pitomaca),
-                new DefaultWaypoint(dj)));
+        Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>(Arrays.asList(
+                new SwingWaypoint(pitomaca, 1, jxMapViewer),
+                new SwingWaypoint(dj,2, jxMapViewer)));
+
+        for (SwingWaypoint w : waypoints) {
+            BufferedImage img = null;
+            try{
+
+                img = ImageIO.read(new File("C:\\Users\\Matija\\Pictures\\8.png"));
+                ImageIcon ikona = new ImageIcon(img.
+                        getScaledInstance(24, 24, Image.SCALE_DEFAULT));
+                w.getButton().setIcon(ikona);
 
 
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+
+            jxMapViewer.add(w.getButton());
+        }
 
 
 
         WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
         waypointPainter.setWaypoints(waypoints);
 
+
+        WaypointPainter<SwingWaypoint> swingWaypointPainter = new SwingWaypointOverlayPainter();
+        swingWaypointPainter.setWaypoints(waypoints);
+
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>();
-        painter.addPainter(waypointPainter);
+        painter.addPainter(swingWaypointPainter);
         painter.addPainter(routePainter);
         jxMapViewer.setOverlayPainter(painter);
 
@@ -79,11 +106,11 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
-        try {
-            VodovodView vodovodView = new VodovodView(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public static void main(String[] args) throws SQLException {
+        //Main main  = new Main();
+
+
+        //VodovodView vodovodView = new VodovodView(1);
+        Login login = new Login();
     }
 }

@@ -14,10 +14,11 @@ public class VodovodSelection {
     private JButton noviVodovodButton;
 
     JButton odaberiButton;
+    JFrame frame = new JFrame("Selection");
+
 
     VodovodSelection() {
 
-        JFrame frame = new JFrame("Selection");
         frame.setContentPane(panelMain);
         frame.setPreferredSize(new Dimension(300, 300));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +47,7 @@ public class VodovodSelection {
 
                     try {
                         VodovodView vodovodView = new VodovodView((Integer) model.getValueAt(odabrani, 0));
+                        frame.dispose();
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -113,10 +115,12 @@ public class VodovodSelection {
                     if (odabrani >= 0){
 
                         TableModel model = tablePlinovoda.getModel();
-                        System.out.println(model.getValueAt(odabrani, 0));
+                        //System.out.println(model.getValueAt(odabrani, 0));
+
 
                         try {
                             VodovodView vodovodView = new VodovodView((Integer) model.getValueAt(odabrani, 0));
+                            frame.dispose();
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
