@@ -21,22 +21,29 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
+import java.util.stream.Stream;
 
 public class VodovodView {
     private JPanel panelMain;
     private JPanel mapPanel;
     private JLabel statistikaLabel;
     private JButton spremiButton;
+    private JButton natragButton;
     static JXMapViewer jxMapViewer = new JXMapViewer();
     static CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>();
     static List<GeoPosition> positionList = new ArrayList<>();
     static List<GeoPosition> getInList = new ArrayList<>();
     private static final double CLICK_TOLERANCE = 5;
     boolean isAlreadyOneClick;
-    private int clicks;
+    public static Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>();
 
 
     VodovodView(int id) throws SQLException {
+        jxMapViewer = new JXMapViewer();
+        painter = new CompoundPainter<JXMapViewer>();
+        positionList = new ArrayList<>();
+        getInList = new ArrayList<>();
+        waypoints = new HashSet<SwingWaypoint>();
 
         VodovodDaoImplementation vodovodDaoImplementation = new VodovodDaoImplementation();
 
@@ -45,7 +52,7 @@ public class VodovodView {
         frame.setPreferredSize(new Dimension(600, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+        //TODO: postaviti sve vezano za kartu u svoju inicijalizacijsku metodu
         //stavljanje tilefactorya tj tip karte (satelit, topograf, itd.)
         TileFactoryInfo info = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.HYBRID);
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
@@ -70,43 +77,125 @@ public class VodovodView {
         osvjeziKartu(id);
         jxMapViewer.zoomToBestFit(new HashSet<GeoPosition>(positionList), 0.9);
 
+        natragButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int odluceno = JOptionPane.showConfirmDialog(null, "Želite li spremit promjene?", "SPremanje",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (odluceno==JOptionPane.YES_OPTION){
+                    spremiTockeUbazu(id);
+                    VodovodSelection vodovodSelection = new VodovodSelection();
+                    frame.dispose();
+                    waypoints = new HashSet<SwingWaypoint>();
+                    positionList = new ArrayList<>();
+                    getInList = new ArrayList<GeoPosition>();
+                    painter = null;
+                    jxMapViewer = null;
+                } else if (odluceno==JOptionPane.NO_OPTION) {
+                    painter = null;
+                    jxMapViewer = null;
+                    positionList = new ArrayList<>();
+                    getInList = new ArrayList<GeoPosition>();
+                    waypoints = new HashSet<SwingWaypoint>();
+                    VodovodSelection vodovodSelection = new VodovodSelection();
+                    frame.dispose();
+                } else{
+                    return;
+                }
+            }
+        });
+
         spremiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VodovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new VodovodnaTockaDaoImplementation();
-                System.out.println(getInList);
-                System.out.println(positionList);
-                for (int i = 0;i <= getInList.size()-1; i++){
-
-
-                    GeoPosition geoPosition = positionList.get(i);
-                    System.out.println(" "+i+" "+geoPosition);
-
-                    VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i,null,id,1);
-                    try {
-                        vodovodnaTockaDaoImplementation.updateVodvodnaTockaPosition(vodovodnaTocka);
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-                /*for (int i = getInList.size();i < positionList.size(); i++){
-                    GeoPosition geoPosition = positionList.get(i);
-                    System.out.println(" "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
-                    VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(0, geoPosition.getLatitude(), geoPosition.getLongitude(),i,null,id,1);
-                    try {
-                        vodovodnaTockaDaoImplementation.insertVodovodnaTocka(vodovodnaTocka);
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }*/
-
-
+                spremiTockeUbazu(id);
             }
         });
 
     }
 
+    public void spremiTockeUbazu(int id){
+        VodovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new VodovodnaTockaDaoImplementation();
+        System.out.println(getInList);
+        System.out.println(positionList);
+        int difference = 0;
+        if (getInList.size() > positionList.size()){
+            difference = positionList.size()-getInList.size();
+            System.out.println(difference);
+        }
+        for (int i = 0;i <= getInList.size()-1+difference; i++){//updateanje postojecih tocaka
 
+
+            GeoPosition geoPosition = positionList.get(i);
+            System.out.println(" "+i+" "+geoPosition);
+
+            VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+            try {
+                vodovodnaTockaDaoImplementation.updateVodvodnaTockaPosition(vodovodnaTocka);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        if (difference!=0){//brisanje visak tocke koje su potencijonalno nastale
+            System.out.println("deletion accelerated");
+            for (int i = positionList.size();i <= getInList.size()-1; i++){
+                GeoPosition geoPosition = getInList.get(i);
+                System.out.println("deletion "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
+                VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+                try {
+                    vodovodnaTockaDaoImplementation.removeVodovonaTocka(vodovodnaTocka);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+
+            return;
+        }
+        //if na kraju izlazi iz metode ako je modificirana lista manja od one s kojom se ulazi u view, tako da ova for petlja se samo poziva dok to nije slučaj
+        for (int i = getInList.size();i < positionList.size(); i++){
+            GeoPosition geoPosition = positionList.get(i);
+            System.out.println("insert "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
+            VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+            try {
+                vodovodnaTockaDaoImplementation.insertVodovodnaTocka(vodovodnaTocka);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+
+
+
+    }
+    public static void removeWaypoint(SwingWaypoint swingWaypoint){
+
+        //makiva gumb sa same karte i makiva točku iz liste točaka
+        swingWaypoint.getButton().getParent().remove(swingWaypoint.getButton());
+        waypoints.remove(swingWaypoint);
+
+
+        //uzima sortiranu listu tocaka na karti
+        Stream<SwingWaypoint> ls = waypoints.stream().sorted(Comparator.comparing(SwingWaypoint::getId));
+        List<SwingWaypoint> ul = ls.toList();
+
+        //prolazi kroz točke na karti i updatea njihov id tako da budu svi smisleno i po redu
+        int i = 0;
+        for (SwingWaypoint swingWaypointUpdate : ul){
+            i++;
+            System.out.println(""+swingWaypointUpdate.getId()+ i);
+            swingWaypointUpdate.setId(i);
+        }
+
+        //repainta mapu sa novim podatcima
+        WaypointPainter<SwingWaypoint> swingWaypointPainter = new SwingWaypointOverlayPainter();
+        swingWaypointPainter.setWaypoints(waypoints);
+        RoutePainter routePainter = new RoutePainter(positionList);
+
+        painter.addPainter(swingWaypointPainter);
+        painter.addPainter(routePainter);
+
+        jxMapViewer.repaint();
+    } //azurira kartu kada se izbrise waypoint TODO:osvjezivanje karte staviti u svoju sazebnu metodu i azurirati i ocistiti sve metode koje bi mogle to koristit
     public void osvjeziKartu(int id) throws SQLException {
         mapPanel.removeAll();
         jxMapViewer.repaint();
@@ -123,16 +212,38 @@ public class VodovodView {
 
         VodovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new VodovodnaTockaDaoImplementation();
         List<VodovodnaTocka> vodovodnaTockaList = vodovodnaTockaDaoImplementation.getTockeinVodovod(id);
-        Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>();
+        boolean keepNone = false;
+
+        if (vodovodnaTockaList.size() == 0) {
+            vodovodnaTockaList.add(new VodovodnaTocka(45.82363197001308, 15.966461867597275, 1, "",id,1));
+            vodovodnaTockaList.add(new VodovodnaTocka(45.82023783618998, 16.072515674094756, 2, "",id,1));
+            keepNone = true;
+        }
+
+
 
         for (VodovodnaTocka vodovodnaTocka : vodovodnaTockaList){
             GeoPosition geoPosition = new GeoPosition(vodovodnaTocka.getLatutude(), vodovodnaTocka.getLongitude());
             System.out.println(""+vodovodnaTocka.getPoredVodovod());
             waypoints.add(new SwingWaypoint(geoPosition, vodovodnaTocka.getPoredVodovod(), jxMapViewer));
             positionList.add(geoPosition);
-            getInList.add(geoPosition);
+            if (keepNone==false)
+                getInList.add(geoPosition);
         }
-        System.out.println("bok"+positionList);
+        if (waypoints.size() == 0){
+            GeoPosition zagreb = new GeoPosition(45.82363197001308, 15.966461867597275);
+            waypoints.add(new SwingWaypoint(zagreb, 1, jxMapViewer));
+            positionList.add(zagreb);
+            getInList.add(zagreb);
+            jxMapViewer.setZoom(10);
+            jxMapViewer.setAddressLocation(zagreb);
+
+            GeoPosition zagreb2 = new GeoPosition(45.82023783618998, 16.072515674094756);
+            waypoints.add(new SwingWaypoint(zagreb2, 1, jxMapViewer));
+            positionList.add(zagreb2);
+            getInList.add(zagreb2);
+        }
+        //System.out.println("bok"+positionList);
         jxMapViewer.zoomToBestFit(new HashSet<GeoPosition>(positionList), 0.9);
 
         for (SwingWaypoint w : waypoints) {
@@ -154,6 +265,7 @@ public class VodovodView {
         jxMapViewer.repaint();
 
         jxMapViewer.zoomToBestFit(new HashSet<GeoPosition>(positionList), 0.9);
+
 
 
         jxMapViewer.addMouseListener(new MouseAdapter() {
@@ -178,7 +290,8 @@ public class VodovodView {
 
             }
         });
-    }
+
+    } //overcomplycated metoda za postavljanje kartu TODO:remake
     public void doubleClick(MouseEvent e) {
         Point2D clickPoint = e.getPoint();
 
@@ -193,21 +306,15 @@ public class VodovodView {
     }
 
     public void updateMapNewWaypoint(GeoPosition coords){
-        System.out.println("here");
-        System.out.println(positionList);
+        //System.out.println("here");
+        //System.out.println(positionList);
 
 
         RoutePainter routePainter = new RoutePainter(positionList);
         WaypointPainter<SwingWaypoint> swingWaypointPainter = new SwingWaypointOverlayPainter();
 
         painter.addPainter(swingWaypointPainter);
-        Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>();
-
         waypoints.add(new SwingWaypoint(coords, positionList.indexOf(coords)+1, jxMapViewer));
-
-        /*for (GeoPosition geoPosition : positionList) {
-            waypoints.add(new SwingWaypoint(geoPosition, positionList.indexOf(geoPosition)+1, jxMapViewer));
-        }*/
 
         for (SwingWaypoint w : waypoints) {
             BufferedImage img = null;
@@ -227,7 +334,7 @@ public class VodovodView {
 
         jxMapViewer.repaint();
 
-    }
+    } //dodaje swingwaypoint gumb na kartu TODO:clean up
 
     public static void updateMapRoute(int id, GeoPosition coord){
         positionList.set(id-1, coord);
@@ -263,14 +370,7 @@ public class VodovodView {
             return i; // Click is within tolerance of the line segment
         }
         return -1; // Click is not near any segment of the route
-    }
+    } //ovaj kod je trenutačno nekorisniv i nije uporabiv TODO:porpraviti ili maknuti i maknuti svako pizovanje
 
-    private static List<DefaultWaypoint> createWaypoints(List<GeoPosition> route) {
-        List<DefaultWaypoint> waypoints = new ArrayList<>();
-        for (GeoPosition position : route) {
-            waypoints.add(new DefaultWaypoint(position));
-        }
-        return waypoints;
-    }
 
 }

@@ -10,7 +10,10 @@ public class VodovodnaTockaDaoImplementation implements VodovodnaTockaDao{
     Connection connection = DatabaseConnection.getConnection();
     @Override
     public List<VodovodnaTocka> getTockeinVodovod(int idVodovoda) throws SQLException {
-        String query = "SELECT * FROM Vodovod inner join VodovodnaTocka on VodovodnaTocka.idVodovod = Vodovod.idVodovod inner join TipVodovodneTocke on VodovodnaTocka.idTipVodovodneTocke = TipVodovodneTocke.idTipVodovodneTocke where Vodovod.idVodovod = ? order by poredVodovod;";
+        String query = "SELECT * FROM Vodovod " +
+                "inner join VodovodnaTocka on VodovodnaTocka.idVodovod = Vodovod.idVodovod " +
+                "inner join TipVodovodneTocke on VodovodnaTocka.idTipVodovodneTocke = TipVodovodneTocke.idTipVodovodneTocke " +
+                "where Vodovod.idVodovod = ? order by poredVodovod;";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, idVodovoda);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -46,6 +49,17 @@ public class VodovodnaTockaDaoImplementation implements VodovodnaTockaDao{
     @Override
     public void updateVodvodnaTockaPosition(VodovodnaTocka vodovodnaTocka) throws SQLException {
         String query = "UPDATE VodovodnaTocka SET latitude = ?, longitude = ? WHERE (poredVodovod = ?) and (idVodovod = ?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setDouble(1, vodovodnaTocka.getLatutude());
+        preparedStatement.setDouble(2, vodovodnaTocka.getLongitude());
+        preparedStatement.setInt(3, vodovodnaTocka.getPoredVodovod());
+        preparedStatement.setInt(4, vodovodnaTocka.getIdVodovod());
+        preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public void removeVodovonaTocka(VodovodnaTocka vodovodnaTocka) throws SQLException {
+        String query = "DELETE FROM VodovodnaTocka WHERE (latitude = ?) and (longitude = ?) and (poredVodovod = ?) and (idVodovod = ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setDouble(1, vodovodnaTocka.getLatutude());
         preparedStatement.setDouble(2, vodovodnaTocka.getLongitude());

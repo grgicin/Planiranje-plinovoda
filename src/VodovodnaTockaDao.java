@@ -5,4 +5,5 @@ public interface VodovodnaTockaDao {
     public List<VodovodnaTocka> getTockeinVodovod(int idVodovoda) throws SQLException;
     public void insertVodovodnaTocka(VodovodnaTocka vodovodnaTocka) throws SQLException;
     public void updateVodvodnaTockaPosition(VodovodnaTocka vodovodnaTocka) throws SQLException;
+    public void removeVodovonaTocka(VodovodnaTocka vodovodnaTocka) throws SQLException;
 }

@@ -23,7 +23,7 @@ public class KorisnikDaoImplementation implements KorisnikDao{
 
     @Override
     public void korisnikRegister(Korisnik korisnik) throws SQLException {
-        String query =  "insert into korisnik(ime,Prezime, brojTelefona, email, lozinka) values(?,?,?,?,?);";
+        String query =  "insert into Korisnik(ime,Prezime, brojTelefona, email, lozinka,idUloga) values(?,?,?,?,?,1);";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1,korisnik.getIme());
         preparedStatement.setString(2,korisnik.getPrezime());

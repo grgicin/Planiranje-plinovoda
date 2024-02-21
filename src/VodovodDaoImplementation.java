@@ -36,4 +36,12 @@ public class VodovodDaoImplementation implements VodovodDao{
         return vodovod;
     }
 
+    @Override
+    public void newVodovod(String naziv) throws SQLException {
+        String query = "INSERT INTO Vodovod (naziv) VALUES (?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, naziv);
+        preparedStatement.executeUpdate();
+    }
+
 }

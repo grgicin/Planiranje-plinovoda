@@ -5,25 +5,27 @@ import org.jxmapviewer.viewer.GeoPosition;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.sql.SQLException;
 
 public class SwingWaypoint extends DefaultWaypoint {
     private final JButton button;
     private int id;
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    private GeoPosition coord;
     public GeoPosition getCoord() {
         return coord;
     }
-
     public void setCoord(GeoPosition coord) {
         this.coord = coord;
     }
-
-    private GeoPosition coord;
     private JXMapViewer jxMapViewer;
     public SwingWaypoint(GeoPosition coord, int id, JXMapViewer jxMapViewer) {
         super(coord);
@@ -32,6 +34,7 @@ public class SwingWaypoint extends DefaultWaypoint {
         this.jxMapViewer = jxMapViewer;
         this.id = id;
         this.coord = coord;
+        //System.out.println(id);
 
         button = new JButton();
         button.setSize(24, 24);
@@ -56,14 +59,35 @@ public class SwingWaypoint extends DefaultWaypoint {
         @Override
         public void mouseClicked(MouseEvent e) {
             JPopupMenu popupMenu = new JPopupMenu();
-            JMenuItem editMenuItem = new JMenuItem("Edit");
-            popupMenu.add(editMenuItem);
+            popupMenu.setPreferredSize(new Dimension(50,80));
+            JMenuItem urediMenuItem = new JMenuItem("Edit");
+            JMenuItem obrisiMenuItem = new JMenuItem("obrisi");
+            popupMenu.add(urediMenuItem);
+            popupMenu.add(obrisiMenuItem);
+
+            obrisiMenuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //System.out.println(VodovodView.positionList);
+                    VodovodView.positionList.remove(SwingWaypoint.this.coord);
+                    //System.out.println(VodovodView.positionList);
+                    VodovodView.removeWaypoint(SwingWaypoint.this);
+
+                }
+            });
 
 
 
             popupMenu.show(button, 0, button.getHeight());
 
-            JOptionPane.showMessageDialog(button, "bok" + id);
+            urediMenuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JOptionPane.showMessageDialog(button, "bok " + id + " coords " +coord);
+                }
+            });
+
+            //JOptionPane.showMessageDialog(button, "bok" + id);
 
         }
 
@@ -75,10 +99,9 @@ public class SwingWaypoint extends DefaultWaypoint {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            GeoPosition draggedPosition = jxMapViewer.convertPointToGeoPosition(jxMapViewer.getMousePosition());
-            System.out.println(jxMapViewer.getMousePosition());
+            //System.out.println(jxMapViewer.getMousePosition());
             SwingWaypoint.this.setCoord(jxMapViewer.convertPointToGeoPosition(jxMapViewer.getMousePosition()));
-            System.out.println(SwingWaypoint.this.getCoord());
+            //System.out.println(SwingWaypoint.this.getCoord());
             VodovodView.updateMapRoute(SwingWaypoint.this.id, SwingWaypoint.this.coord);
 
         }

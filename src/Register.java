@@ -37,7 +37,7 @@ public class Register {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (imeTextField.getText().isEmpty() || prezimeTextField.getText().isEmpty() ||  brojTelefonaTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || passwordField.getText().isEmpty() || !(passwordField.getText().equals(passwordConfirmField.getText()))){
-                    System.out.println("bome");
+                    JOptionPane.showMessageDialog(null, "Registracija nije uspješana");
                     return;
                 }
                 try {
@@ -45,6 +45,9 @@ public class Register {
                     Encryption encryption = new Encryption();
                     Korisnik korisnik = new Korisnik(imeTextField.getText(), prezimeTextField.getText(), brojTelefonaTextField.getText(), emailTextField.getText(), encryption.Encrypt(passwordField.getText()));
                     korisnikDaoImplementation.korisnikRegister(korisnik);
+                    JOptionPane.showMessageDialog(null, "Zapisani ste kao randik javite se administratoru sustava da to promijeni ako to nije vaša titula", "Radnik",JOptionPane.WARNING_MESSAGE);
+                    Login login = new Login();
+                    frame.dispose();
 
                 } catch (NoSuchAlgorithmException ex) {
                     throw new RuntimeException(ex);

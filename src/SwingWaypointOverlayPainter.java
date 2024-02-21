@@ -12,11 +12,7 @@ import java.awt.geom.Point2D;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseMotionListener;
 
-/**
- * "Paints" the Swing waypoints. In fact, just takes care of correct positioning of the representing button.
- *
- * @author Daniel Stahr
- */
+
 public class SwingWaypointOverlayPainter extends WaypointPainter<SwingWaypoint> {
 
 

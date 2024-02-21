@@ -43,22 +43,29 @@ public class Login {
                 KorisnikDaoImplementation korisnikDaoImplementation = new KorisnikDaoImplementation();
                 Encryption encryption = new Encryption();
                 try {
+
                     Korisnik korisnik = new Korisnik();
                     korisnik.setEmail(String.valueOf(emailTextField.getText()));
                     String sha = encryption.Encrypt(passwordField.getText());
                     korisnik.setLozinka(sha);
+
+                    //dobivanje informacije o loginu ako je uspješan a ako nije dobivamo nepostojeći id koji javlja grešku
                     int idKorisnik = korisnikDaoImplementation.korisnikLogin(korisnik);
-                    if (idKorisnik != 0){
-                        Korisnik korinsnikLoggedIn =  korisnikDaoImplementation.getKorisnik(idKorisnik);
-                        LoggedKorisnik.id = korinsnikLoggedIn.getId();
-                        LoggedKorisnik.ime = korinsnikLoggedIn.getIme();
-                        LoggedKorisnik.prezime = korinsnikLoggedIn.getPrezime();
-                        LoggedKorisnik.brojTelefona = korinsnikLoggedIn.getBrojTelefona();
-                        LoggedKorisnik.email = korinsnikLoggedIn.getEmail();
-                        LoggedKorisnik.idUloga = korinsnikLoggedIn.getIdUloga();
-                        frame.dispose();
-                        VodovodSelection vodovodSelection = new VodovodSelection();
-                    }
+
+                    //ako postoji bilo koji neuspjesan slucaj na razini baze iz nje se vraća 0 i govori korisniku da je login neuspješan
+                    if (idKorisnik == 0){JOptionPane.showMessageDialog(null, "Login nije uspješan");return;}
+
+                    //ako je login uspješan postavljaju se korisnikove informacije u LoggedUser klasu
+                    Korisnik korinsnikLoggedIn =  korisnikDaoImplementation.getKorisnik(idKorisnik);
+                    LoggedKorisnik.id = korinsnikLoggedIn.getId();
+                    LoggedKorisnik.ime = korinsnikLoggedIn.getIme();
+                    LoggedKorisnik.prezime = korinsnikLoggedIn.getPrezime();
+                    LoggedKorisnik.brojTelefona = korinsnikLoggedIn.getBrojTelefona();
+                    LoggedKorisnik.email = korinsnikLoggedIn.getEmail();
+                    LoggedKorisnik.idUloga = korinsnikLoggedIn.getIdUloga();
+                    frame.dispose();
+                    VodovodSelection vodovodSelection = new VodovodSelection();
+
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 } catch (NoSuchAlgorithmException ex) {

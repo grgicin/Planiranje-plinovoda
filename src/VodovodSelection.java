@@ -35,6 +35,23 @@ public class VodovodSelection {
             }
         });
 
+        noviVodovodButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String imeNovogVodovoda = JOptionPane.showInputDialog(null,"Ime Vodovoda");
+                VodovodDaoImplementation vodovodDaoImplementation = new VodovodDaoImplementation();
+                try {
+                    vodovodDaoImplementation.newVodovod(imeNovogVodovoda);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                osvjeziTablicu();
+            }
+        });
+
+
+
+
 
         tablePlinovoda.addMouseListener(new MouseAdapter() {
             @Override

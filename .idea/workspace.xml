@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="Login DatabaseConnection Pocetak VodovodSeletion-a">
+    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="Mog">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/databaseConnectionInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/databaseConnectionInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RoutePainter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RoutePainter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SwingWaypoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SwingWaypoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SwingWaypointOverlayPainter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SwingWaypointOverlayPainter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodDaoImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VodovodSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodSelection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VodovodView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VodovodView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodnaTocka.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodnaTocka.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VodovodnaTockaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodnaTockaDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VodovodnaTockaDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodnaTockaDaoImplementation.java" afterDir="false" />
     </list>
@@ -23,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -42,21 +45,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;176&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Matija/Documents/Skola/Robotic/2zimski/SlikaUBlob&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.32413793&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;discord-application&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "176",
+    "last_opened_file_path": "C:/Users/Matija/Documents/Skola/Robotic/2zimski/Financijski planner",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.32413793",
+    "settings.editor.selected.configurable": "discord-application"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Matija\Documents\Skola\Robotic\bs\Planiranje plinovoda\src" />
@@ -179,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708368904930</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Implementacija pogledanja karte ispis rute plinovoda na kartu ovisi po tome koji je plinovod odabran sa custom gumbima za interakciju na svakojoj točki (waypointu) za buduće editiranje. Moguće dodavanje još točaka sa duplim klikom i micanje samih točaka po karti.">
+      <created>1708453074366</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1708453074366</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -190,6 +200,7 @@
     <MESSAGE value="Preperation for login" />
     <MESSAGE value="Basic Dao implementacije iz baze" />
     <MESSAGE value="Login DatabaseConnection Pocetak VodovodSeletion-a" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login DatabaseConnection Pocetak VodovodSeletion-a" />
+    <MESSAGE value="Implementacija pogledanja karte ispis rute plinovoda na kartu ovisi po tome koji je plinovod odabran sa custom gumbima za interakciju na svakojoj točki (waypointu) za buduće editiranje. Moguće dodavanje još točaka sa duplim klikom i micanje samih točaka po karti." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementacija pogledanja karte ispis rute plinovoda na kartu ovisi po tome koji je plinovod odabran sa custom gumbima za interakciju na svakojoj točki (waypointu) za buduće editiranje. Moguće dodavanje još točaka sa duplim klikom i micanje samih točaka po karti." />
   </component>
 </project>
