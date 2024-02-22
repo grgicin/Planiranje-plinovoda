@@ -249,7 +249,7 @@ public class VodovodView {
         for (SwingWaypoint w : waypoints) {
             BufferedImage img = null;
             try {
-                img = ImageIO.read(new File("C:\\Users\\Matija\\Pictures\\9.png"));
+                img = ImageIO.read(new File("resources\\9.png"));
                 ImageIcon ikona = new ImageIcon(img.getScaledInstance(24, 24, Image.SCALE_DEFAULT));
                 w.getButton().setIcon(ikona);
             } catch (IOException ex) {
@@ -319,7 +319,7 @@ public class VodovodView {
         for (SwingWaypoint w : waypoints) {
             BufferedImage img = null;
             try {
-                img = ImageIO.read(new File("C:\\Users\\Matija\\Pictures\\9.png"));
+                img = ImageIO.read(new File("resources\\9.png"));
                 ImageIcon ikona = new ImageIcon(img.getScaledInstance(24, 24, Image.SCALE_DEFAULT));
                 w.getButton().setIcon(ikona);
             } catch (IOException ex) {

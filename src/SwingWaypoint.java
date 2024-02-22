@@ -93,8 +93,6 @@ public class SwingWaypoint extends DefaultWaypoint {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            // Store the mouse pressed point
-            //mousePressedPoint = jxMapViewer.convertPointToGeoPosition(e.getPoint());
         }
 
         @Override
