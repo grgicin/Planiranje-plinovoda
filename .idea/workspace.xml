@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="Mog">
+    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="Ažurirano mjesto same slike od waypointa da koristi relativnu lokaciju">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/databaseConnectionInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/databaseConnectionInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SwingWaypoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SwingWaypoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VodovodView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VodovodView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +45,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;176&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Matija/Documents/Skola/Robotic/2zimski/Financijski planner&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.32413793&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;discord-application&quot;
@@ -185,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708540459874</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Ažurirano mjesto same slike od waypointa da koristi relativnu lokaciju">
+      <created>1708590597859</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1708590597859</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -198,6 +207,7 @@
     <MESSAGE value="Login DatabaseConnection Pocetak VodovodSeletion-a" />
     <MESSAGE value="Implementacija pogledanja karte ispis rute plinovoda na kartu ovisi po tome koji je plinovod odabran sa custom gumbima za interakciju na svakojoj točki (waypointu) za buduće editiranje. Moguće dodavanje još točaka sa duplim klikom i micanje samih točaka po karti." />
     <MESSAGE value="Omogučeno brisanje točaka spremanje same rute u bazu i dodana mogućnost za izrađivanje novog vodovoda sa template rutom koj osigurava da se stvari ne strgaju" />
-    <option name="LAST_COMMIT_MESSAGE" value="Omogučeno brisanje točaka spremanje same rute u bazu i dodana mogućnost za izrađivanje novog vodovoda sa template rutom koj osigurava da se stvari ne strgaju" />
+    <MESSAGE value="Ažurirano mjesto same slike od waypointa da koristi relativnu lokaciju" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ažurirano mjesto same slike od waypointa da koristi relativnu lokaciju" />
   </component>
 </project>

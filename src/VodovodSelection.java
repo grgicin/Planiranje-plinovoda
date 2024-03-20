@@ -39,7 +39,9 @@ public class VodovodSelection {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String imeNovogVodovoda = JOptionPane.showInputDialog(null,"Ime Vodovoda");
+                if (imeNovogVodovoda == null)return;
                 VodovodDaoImplementation vodovodDaoImplementation = new VodovodDaoImplementation();
+
                 try {
                     vodovodDaoImplementation.newVodovod(imeNovogVodovoda);
                 } catch (SQLException ex) {

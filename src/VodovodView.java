@@ -25,10 +25,12 @@ import java.util.stream.Stream;
 
 public class VodovodView {
     private JPanel panelMain;
+    private JPanel containterPanel;
     private JPanel mapPanel;
     private JLabel statistikaLabel;
     private JButton spremiButton;
     private JButton natragButton;
+    private JButton powerMoveButton;
     static JXMapViewer jxMapViewer = new JXMapViewer();
     static CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>();
     static List<GeoPosition> positionList = new ArrayList<>();
@@ -77,6 +79,23 @@ public class VodovodView {
         osvjeziKartu(id);
         jxMapViewer.zoomToBestFit(new HashSet<GeoPosition>(positionList), 0.9);
 
+
+        try {
+            buttonCusomization();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        powerMoveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                powerMoveView powerMoveView = new powerMoveView();
+                frame.dispose();
+            }
+        });
+
+
         natragButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,6 +129,30 @@ public class VodovodView {
                 spremiTockeUbazu(id);
             }
         });
+
+    }
+
+    private void buttonCusomization() throws IOException {
+        Image backimage = ImageIO.read(new File("resources\\back-button.png"));
+        ImageIcon backImageIcon = new ImageIcon(backimage.getScaledInstance(25,25,Image.SCALE_SMOOTH));
+        natragButton.setText("");
+        natragButton.setIcon(backImageIcon);
+        natragButton.setOpaque(false);
+        natragButton.setContentAreaFilled(false);
+        natragButton.setBorderPainted(false);
+        natragButton.setSelected(false);
+        natragButton.setVisible(true);
+
+
+        Image powerImage = ImageIO.read(new File("resources\\power-button.png"));
+        ImageIcon powerImageIcon = new ImageIcon(powerImage.getScaledInstance(25,25,Image.SCALE_SMOOTH));
+        powerMoveButton.setText("");
+        powerMoveButton.setIcon(powerImageIcon);
+        powerMoveButton.setOpaque(false);
+        powerMoveButton.setContentAreaFilled(false);
+        powerMoveButton.setBorderPainted(false);
+        powerMoveButton.setSelected(false);
+        powerMoveButton.setVisible(true);
 
     }
 
@@ -249,7 +292,7 @@ public class VodovodView {
         for (SwingWaypoint w : waypoints) {
             BufferedImage img = null;
             try {
-                img = ImageIO.read(new File("resources\\9.png"));
+                img = ImageIO.read(new File("resources\\waypoint.png"));
                 ImageIcon ikona = new ImageIcon(img.getScaledInstance(24, 24, Image.SCALE_DEFAULT));
                 w.getButton().setIcon(ikona);
             } catch (IOException ex) {
@@ -272,7 +315,7 @@ public class VodovodView {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (isAlreadyOneClick) {
-                    System.out.println("double click");
+                    //System.out.println("double click");
                     doubleClick(e);
                     isAlreadyOneClick = false;
                 } else {
@@ -319,7 +362,7 @@ public class VodovodView {
         for (SwingWaypoint w : waypoints) {
             BufferedImage img = null;
             try {
-                img = ImageIO.read(new File("resources\\9.png"));
+                img = ImageIO.read(new File("resources\\waypoint.png"));
                 ImageIcon ikona = new ImageIcon(img.getScaledInstance(24, 24, Image.SCALE_DEFAULT));
                 w.getButton().setIcon(ikona);
             } catch (IOException ex) {
