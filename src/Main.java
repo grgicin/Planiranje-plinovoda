@@ -1,3 +1,4 @@
+import com.formdev.flatlaf.FlatLightLaf;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.VirtualEarthTileFactoryInfo;
 import org.jxmapviewer.input.PanMouseInputListener;
@@ -106,6 +107,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         //Main main  = new Main();
 
+        FlatLightLaf.setup();
 
         //VodovodView vodovodView = new VodovodView(1);
         Login login = new Login();

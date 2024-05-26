@@ -22,8 +22,8 @@ public class Register {
         frame.setPreferredSize(new Dimension(300, 500));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         odustaniButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

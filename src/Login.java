@@ -19,11 +19,11 @@ public class Login {
         frame.setPreferredSize(new Dimension(300,300));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
 
 
-        VodovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new VodovodnaTockaDaoImplementation();
+        PlinovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new PlinovodnaTockaDaoImplementation();
         try {
             System.out.println(vodovodnaTockaDaoImplementation.getTockeinVodovod(1));
         } catch (SQLException e) {

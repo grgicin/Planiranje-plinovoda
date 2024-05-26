@@ -23,9 +23,9 @@ public class VodovodSelection {
         frame.setPreferredSize(new Dimension(300, 300));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
         osvjeziTablicu();
         frame.pack();
+        frame.setLocationRelativeTo(null);
 
         natragButton.addActionListener(new ActionListener() {
             @Override
@@ -40,7 +40,7 @@ public class VodovodSelection {
             public void actionPerformed(ActionEvent e) {
                 String imeNovogVodovoda = JOptionPane.showInputDialog(null,"Ime Vodovoda");
                 if (imeNovogVodovoda == null)return;
-                VodovodDaoImplementation vodovodDaoImplementation = new VodovodDaoImplementation();
+                PlinovodDaoImplementation vodovodDaoImplementation = new PlinovodDaoImplementation();
 
                 try {
                     vodovodDaoImplementation.newVodovod(imeNovogVodovoda);
@@ -104,15 +104,15 @@ public class VodovodSelection {
     }
 
     private void osvjeziTablicu() {
-        VodovodDaoImplementation vodovodDaoImplementation = new VodovodDaoImplementation();
+        PlinovodDaoImplementation vodovodDaoImplementation = new PlinovodDaoImplementation();
         try {
-            List<Vodovod> vodovodList = vodovodDaoImplementation.getVodovodi();
+            List<Plinovod> plinovodList = vodovodDaoImplementation.getVodovodi();
             DefaultTableModel defaultTableModel = new DefaultTableModel();
             defaultTableModel.addColumn("");
             defaultTableModel.addColumn("Naziv");
             defaultTableModel.addColumn("");
-            for (Vodovod vodovod : vodovodList){
-                defaultTableModel.addRow(new Object[]{vodovod.getId(), vodovod.getNaziv()});
+            for (Plinovod plinovod : plinovodList){
+                defaultTableModel.addRow(new Object[]{plinovod.getId(), plinovod.getNaziv()});
             }
             odaberiButton = new JButton();
             tablePlinovoda.setModel(defaultTableModel);

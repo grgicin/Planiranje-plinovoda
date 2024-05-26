@@ -47,9 +47,9 @@ public class VodovodView {
         getInList = new ArrayList<>();
         waypoints = new HashSet<SwingWaypoint>();
 
-        VodovodDaoImplementation vodovodDaoImplementation = new VodovodDaoImplementation();
+        PlinovodDaoImplementation vodovodDaoImplementation = new PlinovodDaoImplementation();
 
-        JFrame frame = new JFrame("Vodovod - "+vodovodDaoImplementation.getVodovod(id).getNaziv());
+        JFrame frame = new JFrame("Plinovod - "+vodovodDaoImplementation.getVodovod(id).getNaziv());
         frame.setContentPane(panelMain);
         frame.setPreferredSize(new Dimension(600, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,9 +72,9 @@ public class VodovodView {
         mapPanel.setPreferredSize(new Dimension(600 ,400));
         mapPanel.add(jxMapViewer, BorderLayout.CENTER);
 
-        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         statistikaLabel.setText("Vodovod - "+vodovodDaoImplementation.getVodovod(id).getNaziv());
         osvjeziKartu(id);
         jxMapViewer.zoomToBestFit(new HashSet<GeoPosition>(positionList), 0.9);
@@ -157,7 +157,7 @@ public class VodovodView {
     }
 
     public void spremiTockeUbazu(int id){
-        VodovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new VodovodnaTockaDaoImplementation();
+        PlinovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new PlinovodnaTockaDaoImplementation();
         System.out.println(getInList);
         System.out.println(positionList);
         int difference = 0;
@@ -171,9 +171,9 @@ public class VodovodView {
             GeoPosition geoPosition = positionList.get(i);
             System.out.println(" "+i+" "+geoPosition);
 
-            VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+            PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
             try {
-                vodovodnaTockaDaoImplementation.updateVodvodnaTockaPosition(vodovodnaTocka);
+                vodovodnaTockaDaoImplementation.updateVodvodnaTockaPosition(plinovodnaTocka);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -183,9 +183,9 @@ public class VodovodView {
             for (int i = positionList.size();i <= getInList.size()-1; i++){
                 GeoPosition geoPosition = getInList.get(i);
                 System.out.println("deletion "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
-                VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+                PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
                 try {
-                    vodovodnaTockaDaoImplementation.removeVodovonaTocka(vodovodnaTocka);
+                    vodovodnaTockaDaoImplementation.removeVodovonaTocka(plinovodnaTocka);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -198,9 +198,9 @@ public class VodovodView {
         for (int i = getInList.size();i < positionList.size(); i++){
             GeoPosition geoPosition = positionList.get(i);
             System.out.println("insert "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
-            VodovodnaTocka vodovodnaTocka = new VodovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+            PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
             try {
-                vodovodnaTockaDaoImplementation.insertVodovodnaTocka(vodovodnaTocka);
+                vodovodnaTockaDaoImplementation.insertVodovodnaTocka(plinovodnaTocka);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -253,22 +253,22 @@ public class VodovodView {
 
         jxMapViewer.setOverlayPainter(painter);
 
-        VodovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new VodovodnaTockaDaoImplementation();
-        List<VodovodnaTocka> vodovodnaTockaList = vodovodnaTockaDaoImplementation.getTockeinVodovod(id);
+        PlinovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new PlinovodnaTockaDaoImplementation();
+        List<PlinovodnaTocka> plinovodnaTockaList = vodovodnaTockaDaoImplementation.getTockeinVodovod(id);
         boolean keepNone = false;
 
-        if (vodovodnaTockaList.size() == 0) {
-            vodovodnaTockaList.add(new VodovodnaTocka(45.82363197001308, 15.966461867597275, 1, "",id,1));
-            vodovodnaTockaList.add(new VodovodnaTocka(45.82023783618998, 16.072515674094756, 2, "",id,1));
+        if (plinovodnaTockaList.size() == 0) {
+            plinovodnaTockaList.add(new PlinovodnaTocka(45.82363197001308, 15.966461867597275, 1, "",id,1));
+            plinovodnaTockaList.add(new PlinovodnaTocka(45.82023783618998, 16.072515674094756, 2, "",id,1));
             keepNone = true;
         }
 
 
 
-        for (VodovodnaTocka vodovodnaTocka : vodovodnaTockaList){
-            GeoPosition geoPosition = new GeoPosition(vodovodnaTocka.getLatutude(), vodovodnaTocka.getLongitude());
-            System.out.println(""+vodovodnaTocka.getPoredVodovod());
-            waypoints.add(new SwingWaypoint(geoPosition, vodovodnaTocka.getPoredVodovod(), jxMapViewer));
+        for (PlinovodnaTocka plinovodnaTocka : plinovodnaTockaList){
+            GeoPosition geoPosition = new GeoPosition(plinovodnaTocka.getLatutude(), plinovodnaTocka.getLongitude());
+            System.out.println(""+ plinovodnaTocka.getPoredVodovod());
+            waypoints.add(new SwingWaypoint(geoPosition, plinovodnaTocka.getPoredVodovod(), jxMapViewer));
             positionList.add(geoPosition);
             if (keepNone==false)
                 getInList.add(geoPosition);
