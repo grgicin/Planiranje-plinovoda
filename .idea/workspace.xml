@@ -4,35 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="ažuriranje imena vodovod - &gt; plinovod">
-      <change afterPath="$PROJECT_DIR$/src/KorisnikUrediView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KorisnikUrediView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KorisnikView.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KorisnikView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PromijeniLozinku.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PromijeniLozinku.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UredivanjeTocke.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UredivanjeTocke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/databaseConnectionInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/databaseConnectionInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Korisnik.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KorisnikDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KorisnikDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KorisnikDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlinovodnaTockaDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlinovodnaTockaDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SwingWaypoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SwingWaypoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vodovod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodDaoImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodSelection.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodSelection.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodView.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VodovodView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodnaTocka.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodnaTockaDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VodovodnaTockaDaoImplementation.java" beforeDir="false" />
-    </list>
+    <list default="true" id="218be78b-3e86-44de-ac99-2c5165e1198e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -229,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716740748451</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="aaaaaaaaaaaaaaaaaaaa">
+      <created>1718689640589</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1718689640589</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -255,6 +234,7 @@
     <MESSAGE value="Omogučeno brisanje točaka spremanje same rute u bazu i dodana mogućnost za izrađivanje novog vodovoda sa template rutom koj osigurava da se stvari ne strgaju" />
     <MESSAGE value="Ažurirano mjesto same slike od waypointa da koristi relativnu lokaciju" />
     <MESSAGE value="ažuriranje imena vodovod - &gt; plinovod" />
-    <option name="LAST_COMMIT_MESSAGE" value="ažuriranje imena vodovod - &gt; plinovod" />
+    <MESSAGE value="aaaaaaaaaaaaaaaaaaaa" />
+    <option name="LAST_COMMIT_MESSAGE" value="aaaaaaaaaaaaaaaaaaaa" />
   </component>
 </project>
