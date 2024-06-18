@@ -1,5 +1,5 @@
 {
-  "url":"",
-  "user": "",
-  "password": ""
+  "url":"jdbc:mysql://138.2.172.178:3306/PlinskiVodovod",
+  "user":"root",
+  "password":"&KDi3KL#3^AXd^5QRRiwPSBkZHmnxk2$"
 }

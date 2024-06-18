@@ -24,6 +24,7 @@ import java.util.Timer;
 import java.util.stream.Stream;
 
 public class VodovodView {
+    private static VodovodView instance;
     private JPanel panelMain;
     private JPanel containterPanel;
     private JPanel mapPanel;
@@ -31,6 +32,7 @@ public class VodovodView {
     private JButton spremiButton;
     private JButton natragButton;
     private JButton powerMoveButton;
+    private JTextArea textArea1;
     static JXMapViewer jxMapViewer = new JXMapViewer();
     static CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>();
     static List<GeoPosition> positionList = new ArrayList<>();
@@ -39,6 +41,7 @@ public class VodovodView {
     boolean isAlreadyOneClick;
     public static Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>();
 
+    static List<String> komentariList = new ArrayList<>();
 
     VodovodView(int id) throws SQLException {
         jxMapViewer = new JXMapViewer();
@@ -46,6 +49,7 @@ public class VodovodView {
         positionList = new ArrayList<>();
         getInList = new ArrayList<>();
         waypoints = new HashSet<SwingWaypoint>();
+        List<String> komentariList = new ArrayList<>();
 
         PlinovodDaoImplementation vodovodDaoImplementation = new PlinovodDaoImplementation();
 
@@ -99,7 +103,7 @@ public class VodovodView {
         natragButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int odluceno = JOptionPane.showConfirmDialog(null, "Želite li spremit promjene?", "SPremanje",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int odluceno = JOptionPane.showConfirmDialog(null, "Želite li spremit promjene?", "Spremanje",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (odluceno==JOptionPane.YES_OPTION){
                     spremiTockeUbazu(id);
                     VodovodSelection vodovodSelection = new VodovodSelection();
@@ -157,6 +161,8 @@ public class VodovodView {
     }
 
     public void spremiTockeUbazu(int id){
+        waypointsToKomentari();
+        System.out.println(komentariList);
         PlinovodnaTockaDaoImplementation vodovodnaTockaDaoImplementation = new PlinovodnaTockaDaoImplementation();
         System.out.println(getInList);
         System.out.println(positionList);
@@ -169,9 +175,9 @@ public class VodovodView {
 
 
             GeoPosition geoPosition = positionList.get(i);
-            System.out.println(" "+i+" "+geoPosition);
+            //System.out.println(" "+i+" "+geoPosition);
 
-            PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+            PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,komentariList.get(i),id,1);
             try {
                 vodovodnaTockaDaoImplementation.updateVodvodnaTockaPosition(plinovodnaTocka);
             } catch (SQLException ex) {
@@ -179,10 +185,10 @@ public class VodovodView {
             }
         }
         if (difference!=0){//brisanje visak tocke koje su potencijonalno nastale
-            System.out.println("deletion accelerated");
+            //System.out.println("deletion accelerated");
             for (int i = positionList.size();i <= getInList.size()-1; i++){
                 GeoPosition geoPosition = getInList.get(i);
-                System.out.println("deletion "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
+                //System.out.println("deletion "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
                 PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
                 try {
                     vodovodnaTockaDaoImplementation.removeVodovonaTocka(plinovodnaTocka);
@@ -197,8 +203,8 @@ public class VodovodView {
         //if na kraju izlazi iz metode ako je modificirana lista manja od one s kojom se ulazi u view, tako da ova for petlja se samo poziva dok to nije slučaj
         for (int i = getInList.size();i < positionList.size(); i++){
             GeoPosition geoPosition = positionList.get(i);
-            System.out.println("insert "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
-            PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,null,id,1);
+            //System.out.println("insert "+i+" "+geoPosition + " "+ (getInList.size()-1+i));
+            PlinovodnaTocka plinovodnaTocka = new PlinovodnaTocka(geoPosition.getLatitude(), geoPosition.getLongitude(),i+1,komentariList.get(i),id,1);
             try {
                 vodovodnaTockaDaoImplementation.insertVodovodnaTocka(plinovodnaTocka);
             } catch (SQLException ex) {
@@ -268,22 +274,25 @@ public class VodovodView {
         for (PlinovodnaTocka plinovodnaTocka : plinovodnaTockaList){
             GeoPosition geoPosition = new GeoPosition(plinovodnaTocka.getLatutude(), plinovodnaTocka.getLongitude());
             System.out.println(""+ plinovodnaTocka.getPoredVodovod());
-            waypoints.add(new SwingWaypoint(geoPosition, plinovodnaTocka.getPoredVodovod(), jxMapViewer));
+            waypoints.add(new SwingWaypoint(geoPosition, plinovodnaTocka.getPoredVodovod(), jxMapViewer,plinovodnaTocka.getKomentar()));
             positionList.add(geoPosition);
+            komentariList.add("");
             if (keepNone==false)
                 getInList.add(geoPosition);
         }
         if (waypoints.size() == 0){
             GeoPosition zagreb = new GeoPosition(45.82363197001308, 15.966461867597275);
-            waypoints.add(new SwingWaypoint(zagreb, 1, jxMapViewer));
+            waypoints.add(new SwingWaypoint(zagreb, 1, jxMapViewer,""));
             positionList.add(zagreb);
+            komentariList.add("");
             getInList.add(zagreb);
             jxMapViewer.setZoom(10);
             jxMapViewer.setAddressLocation(zagreb);
 
             GeoPosition zagreb2 = new GeoPosition(45.82023783618998, 16.072515674094756);
-            waypoints.add(new SwingWaypoint(zagreb2, 1, jxMapViewer));
+            waypoints.add(new SwingWaypoint(zagreb2, 1, jxMapViewer,""));
             positionList.add(zagreb2);
+            komentariList.add("");
             getInList.add(zagreb2);
         }
         //System.out.println("bok"+positionList);
@@ -343,6 +352,7 @@ public class VodovodView {
             GeoPosition newPoint = jxMapViewer.convertPointToGeoPosition(clickPoint);
 
             positionList.add(newPoint);
+            komentariList.add("");
             updateMapNewWaypoint(newPoint);
             System.out.println(newPoint);
         }
@@ -357,7 +367,7 @@ public class VodovodView {
         WaypointPainter<SwingWaypoint> swingWaypointPainter = new SwingWaypointOverlayPainter();
 
         painter.addPainter(swingWaypointPainter);
-        waypoints.add(new SwingWaypoint(coords, positionList.indexOf(coords)+1, jxMapViewer));
+        waypoints.add(new SwingWaypoint(coords, positionList.indexOf(coords)+1, jxMapViewer,""));
 
         for (SwingWaypoint w : waypoints) {
             BufferedImage img = null;
@@ -414,6 +424,21 @@ public class VodovodView {
         }
         return -1; // Click is not near any segment of the route
     } //ovaj kod je trenutačno nekorisniv i nije uporabiv TODO:porpraviti ili maknuti i maknuti svako pizovanje
+    private void waypointsToKomentari(){
+        komentariList = new ArrayList<>();
+        List<SwingWaypoint> swingWaypointList = waypoints.stream().toList();
+        for (SwingWaypoint swingWaypoint : swingWaypointList){
+            komentariList.add("");
+
+        }
+        for (SwingWaypoint swingWaypoint : swingWaypointList){
+            System.out.println(swingWaypoint.getKomentar() + swingWaypoint.getId());
+
+            komentariList.set(swingWaypoint.getId()-1, swingWaypoint.getKomentar());
+        }
+        //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+komentariList.size());
 
 
+
+    }
 }

@@ -58,8 +58,8 @@ public class Main {
         RoutePainter routePainter = new RoutePainter(ls);
 
         Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>(Arrays.asList(
-                new SwingWaypoint(pitomaca, 1, jxMapViewer),
-                new SwingWaypoint(dj,2, jxMapViewer)));
+                new SwingWaypoint(pitomaca, 1, jxMapViewer,""),
+                new SwingWaypoint(dj,2, jxMapViewer,"")));
 
         for (SwingWaypoint w : waypoints) {
             BufferedImage img = null;

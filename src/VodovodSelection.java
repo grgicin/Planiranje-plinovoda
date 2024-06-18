@@ -12,6 +12,7 @@ public class VodovodSelection {
     private JTable tablePlinovoda;
     private JButton natragButton;
     private JButton noviVodovodButton;
+    private JButton pregledKorisnikaButton;
 
     JButton odaberiButton;
     JFrame frame = new JFrame("Selection");
@@ -24,6 +25,9 @@ public class VodovodSelection {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         osvjeziTablicu();
+        if (LoggedKorisnik.idUloga != 2){
+            pregledKorisnikaButton.setVisible(false);
+        }
         frame.pack();
         frame.setLocationRelativeTo(null);
 
@@ -51,7 +55,13 @@ public class VodovodSelection {
             }
         });
 
-
+        pregledKorisnikaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new KorisnikView();
+            }
+        });
 
 
 

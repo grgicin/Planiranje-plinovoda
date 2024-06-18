@@ -6,13 +6,21 @@ public class Korisnik {
     private String email;
     private String lozinka;
     private int idUloga;
+    private int odobreni;
 
-    public Korisnik(String ime, String prezime, String brojTelefona, String email, String lozinka) {
+
+    public Korisnik() {
+    }
+
+    public Korisnik(int id, String ime, String prezime, String brojTelefona, String email, String lozinka, int idUloga, int odobreni) {
+        this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.brojTelefona = brojTelefona;
         this.email = email;
         this.lozinka = lozinka;
+        this.idUloga = idUloga;
+        this.odobreni = odobreni;
     }
 
     public int getId() {
@@ -71,6 +79,11 @@ public class Korisnik {
         this.idUloga = idUloga;
     }
 
-    public Korisnik() {
+    public int getOdobreni() {
+        return odobreni;
+    }
+
+    public void setOdobreni(int odobreni) {
+        this.odobreni = odobreni;
     }
 }

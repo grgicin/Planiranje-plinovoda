@@ -48,12 +48,13 @@ public class PlinovodnaTockaDaoImplementation implements PlinovodnaTockaDao {
 
     @Override
     public void updateVodvodnaTockaPosition(PlinovodnaTocka plinovodnaTocka) throws SQLException {
-        String query = "UPDATE PlinovodnaTocka SET latitude = ?, longitude = ? WHERE (poredVodovod = ?) and (idVodovod = ?);";
+        String query = "UPDATE PlinovodnaTocka SET latitude = ?, longitude = ?, komentar = ? WHERE (poredVodovod = ?) and (idVodovod = ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setDouble(1, plinovodnaTocka.getLatutude());
         preparedStatement.setDouble(2, plinovodnaTocka.getLongitude());
-        preparedStatement.setInt(3, plinovodnaTocka.getPoredVodovod());
-        preparedStatement.setInt(4, plinovodnaTocka.getIdVodovod());
+        preparedStatement.setString(3,plinovodnaTocka.getKomentar());
+        preparedStatement.setInt(4, plinovodnaTocka.getPoredVodovod());
+        preparedStatement.setInt(5, plinovodnaTocka.getIdVodovod());
         preparedStatement.executeUpdate();
     }
 

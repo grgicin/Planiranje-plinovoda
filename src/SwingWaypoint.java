@@ -11,6 +11,16 @@ import java.sql.SQLException;
 
 public class SwingWaypoint extends DefaultWaypoint {
     private final JButton button;
+
+    public String getKomentar() {
+        return komentar;
+    }
+
+    public void setKomentar(String komentar) {
+        this.komentar = komentar;
+    }
+
+    private String komentar;
     private int id;
     public int getId() {
         return id;
@@ -27,13 +37,14 @@ public class SwingWaypoint extends DefaultWaypoint {
         this.coord = coord;
     }
     private JXMapViewer jxMapViewer;
-    public SwingWaypoint(GeoPosition coord, int id, JXMapViewer jxMapViewer) {
+    public SwingWaypoint(GeoPosition coord, int id, JXMapViewer jxMapViewer,String komentar) {
         super(coord);
         /*this.text = text;
         button.setText(text.substring(0, 1));*/
         this.jxMapViewer = jxMapViewer;
         this.id = id;
         this.coord = coord;
+        this.komentar = komentar;
         //System.out.println(id);
 
         button = new JButton();
@@ -54,6 +65,7 @@ public class SwingWaypoint extends DefaultWaypoint {
     }
 
     private class SwingWaypointMouseListener implements MouseListener {
+
 
 
         @Override
@@ -78,12 +90,14 @@ public class SwingWaypoint extends DefaultWaypoint {
 
 
 
+
             popupMenu.show(button, 0, button.getHeight());
 
             urediMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(button, "bok " + id + " coords " +coord);
+                    //JOptionPane.showMessageDialog(button, "bok " + id + " coords " +coord);
+                    aha();
                 }
             });
 
@@ -128,6 +142,13 @@ public class SwingWaypoint extends DefaultWaypoint {
         }
     }
 
+    public void aha(){
+        new UredivanjeTocke(this);
+    }
+    public void SwingWaypointUpdateLocation(GeoPosition geoPosition){
+        this.setPosition(geoPosition);
+        jxMapViewer.repaint();
+    }
 
 
 }
